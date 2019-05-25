@@ -1,0 +1,21 @@
+{
+  "name": "html-panda",
+  "version": "0.0.1",
+  "description": "base class for lit-element like attributes / properties without the async lifecycle stuff",
+  "main": "HTMLPanda.js",
+  "repository": "https://github.com/shaman-apprentice/html-panda.git",
+  "author": "shaman-apprentice <Torsten.Knauf@gmx.de>",
+  "license": "MIT",
+  "scripts": {
+    "test": "karma start ./test/karma.config.js"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "karma": "^4.1.0",
+    "karma-chai": "^0.1.0",
+    "karma-mocha": "^1.3.0",
+    "karma-sinon": "^1.0.5",
+    "mocha": "^6.1.4",
+    "sinon": "^7.3.2"
+  }
+}
