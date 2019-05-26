@@ -1,8 +1,10 @@
 {
   "name": "html-panda",
-  "version": "0.0.1",
-  "description": "base class for lit-element like attributes / properties without the async lifecycle stuff",
+  "version": "0.1.0",
+  "description": "extending HTMLElement with some convenient attribute / property handling - without extra stuff (like e.g. lit-element async stuffs)",
+  "keywords": [ "HTMLElement", "attributes", "properties" ],
   "main": "HTMLPanda.js",
+  "files": [ "HTMLPanda.js" ],
   "repository": "https://github.com/shaman-apprentice/html-panda.git",
   "author": "shaman-apprentice <Torsten.Knauf@gmx.de>",
   "license": "MIT",
