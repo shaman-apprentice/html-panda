@@ -15,7 +15,7 @@ describe('overwriting of `static get properties`', () => {
     customElements.define('plain-static-get-properties-from-panda', class A extends HTMLPanda {})
     document.body.innerHTML = '<plain-static-get-properties-from-panda></plain-static-get-properties-from-panda>'
     
-    chai.expect(htmlPandaPropertiesSpy.get.callCount).to.equal(1)
+    chai.expect(htmlPandaPropertiesSpy.get.called).to.equal(true)
   })
 
   it('calls only custom static get properties', () => {
@@ -24,13 +24,13 @@ describe('overwriting of `static get properties`', () => {
         return []
       }
     }
-
     customElements.define('panda-ext-properites', ExtendingGetProperties)
 
     const customPropertiesSpy = sinon.spy(ExtendingGetProperties, 'properties', ['get'])
+    
     document.body.innerHTML = '<panda-ext-properites></panda-ext-properites>'
 
-    chai.expect(htmlPandaPropertiesSpy.get.callCount).to.equal(0)
-    chai.expect(customPropertiesSpy.get.callCount).to.equal(1)
+    chai.expect(htmlPandaPropertiesSpy.get.called).to.equal(false)
+    chai.expect(customPropertiesSpy.get.called).to.equal(true)
   })
 })
