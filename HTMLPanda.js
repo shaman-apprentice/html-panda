@@ -10,13 +10,6 @@ export default class HTMLPanda extends HTMLElement {
       .filter(v => v)
   }
 
-  attributeChangedCallback(name, oldValue, newValue) {
-    const propName = this._attriName2PropName[name] 
-    this["_" + propName] = newValue 
-    if (this.constructor.properties[propName].onChange)
-      this.constructor.properties[propName].onChange(newValue, oldValue)
-  }
-
   constructor() {
     super()
 
@@ -34,6 +27,13 @@ export default class HTMLPanda extends HTMLElement {
         set: getSetter(this, propName, propDescr), 
       })
     })
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    const propName = this._attriName2PropName[name] 
+    this["_" + propName] = newValue 
+    if (this.constructor.properties[propName].onChange)
+      this.constructor.properties[propName].onChange(newValue, oldValue)
   }
 }
 
