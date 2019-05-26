@@ -15,7 +15,7 @@ export default class HTMLPanda extends HTMLElement {
 
     this._attriName2PropName = {}
 
-    Object.keys(this.constructor.properties).forEach(propName => {
+    Object.keys(this.constructor.properties).forEach(propName => { // defining in `constructor` and not in `static get observedAttributes` because setter must access `this.setAttribute`
       const propDescr = this.constructor.properties[propName]
 
       if (propDescr.attribute)
