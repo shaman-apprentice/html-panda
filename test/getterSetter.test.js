@@ -59,7 +59,7 @@ describe('getter / setter', () => {
     testElem.a = 'some value'
 
     chai.expect(spy.callCount).to.equal(1)
-    chai.expect(spy.calledWithExactly('some value', null)).to.equal(true)
+    chai.expect(spy.calledWithExactly('some value', undefined)).to.equal(true)
     chai.expect(testElem.getAttribute('a')).to.equal('some value')
   })
 

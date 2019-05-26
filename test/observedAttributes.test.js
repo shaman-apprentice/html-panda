@@ -28,7 +28,7 @@ describe('observedAttributes', () => {
     document.body.innerHTML = '<oberved-attribute-on-change attri="some value"></oberved-attribute-on-change>'
 
     chai.expect(spy.callCount).to.equal(1)
-    chai.expect(spy.calledWithExactly('some value', null)).to.equal(true)
+    chai.expect(spy.calledWithExactly('some value', undefined)).to.equal(true)
   })
 
   it('`onChange` works with attribute with dash in name', () => {
@@ -42,7 +42,7 @@ describe('observedAttributes', () => {
     document.body.innerHTML = '<oberved-attribute-with-dash-on-change some-attri="some value"></oberved-attribute-with-dash-on-change>'
 
     chai.expect(spy.callCount).to.equal(1)
-    chai.expect(spy.calledWithExactly('some value', null)).to.equal(true)
+    chai.expect(spy.calledWithExactly('some value', undefined)).to.equal(true)
   })
 
   it('`onChange` with boolean attribute', () => {
@@ -56,7 +56,7 @@ describe('observedAttributes', () => {
     document.body.innerHTML = '<oberved-attribute-boolean attri></oberved-attribute-with-boolean>'
 
     chai.expect(spy.callCount).to.equal(1)
-    chai.expect(spy.calledWithExactly('', null)).to.equal(true)
+    chai.expect(spy.calledWithExactly('', undefined)).to.equal(true)
   })
 
   it('`onChange` gets not called without attribute', () => {

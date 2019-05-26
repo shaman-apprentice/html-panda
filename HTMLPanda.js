@@ -31,27 +31,28 @@ export default class HTMLPanda extends HTMLElement {
 
   attributeChangedCallback(name, oldValue, newValue) {
     const propName = this._attriName2PropName[name] 
-    this["_" + propName] = newValue 
-    if (this.constructor.properties[propName].onChange)
-      this.constructor.properties[propName].onChange(newValue, oldValue)
+    if (newValue !== this[propName])
+      this[propName] = newValue 
   }
 }
 
 function getSetter(instance, propName, propDescr) {
-  let setter = value =>
-    instance['_' + propName] = value
+  let setter = value => {
+    if (instance['_' + propName] === value)
+      return
+
+    return instance['_' + propName] = value
+  }
 
   if (propDescr.attribute) {
     const prevSetter = setter
     setter = value => {
-      instance.setAttribute(propDescr.attribute, value)
       prevSetter(value)
+      instance.setAttribute(propDescr.attribute, value)
     }
   }
 
-  // onChange gets also called in attributeChangeCallback
-  // note that unset value is undefined or null depending if called from property change or attribute change
-  if (propDescr.onChange && !propDescr.attribute) {
+  if (propDescr.onChange) {
     const prevSetter = setter
     setter = value => {
       const oldValue = instance['_' + propName]
