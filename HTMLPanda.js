@@ -6,17 +6,22 @@ export default class HTMLPanda extends HTMLElement {
 
   static get observedAttributes() {
     return Object.keys(this.properties)
+      .map(key => this.properties[key].attribute)
+      .filter(v => v)
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    this.constructor.properties[name].onChange(newValue, oldValue)
+    this._attriName2Prop[name].onChange(newValue, oldValue)
   }
 
   constructor() {
     super()
 
-    Object.keys(this.constructor.properties).forEach(prop => {
+    this._attriName2Prop = {}
 
+    Object.keys(this.constructor.properties).forEach(prop => {
+      const attriName = this.constructor.properties[prop].attribute || prop
+      this._attriName2Prop[attriName] = this.constructor.properties[prop]
     })
   }
 }

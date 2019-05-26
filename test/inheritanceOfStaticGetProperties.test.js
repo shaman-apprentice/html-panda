@@ -21,7 +21,7 @@ describe('overwriting of `static get properties`', () => {
   it('calls only custom static get properties', () => {
     class ExtendingGetProperties extends HTMLPanda {
       static get properties() {
-        return []
+        return {}
       }
     }
     customElements.define('panda-ext-properites', ExtendingGetProperties)
