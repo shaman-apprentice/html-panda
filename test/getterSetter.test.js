@@ -67,7 +67,7 @@ describe('getter / setter', () => {
     const spy = sinon.spy()
     customElements.define('property-becomes-no-attribute', class extends HTMLPanda {
       static get properties() {
-        return { a: { onChange: spy} }
+        return { a: { onChange: spy } }
       }
     })
 
