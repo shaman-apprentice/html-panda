@@ -29,6 +29,19 @@ export default class HTMLPanda extends HTMLElement {
     })
   }
 
+  connectedCallback() {
+    Object.keys(this.constructor.properties).forEach(propName => {
+      const propDescr = this.constructor.properties[propName]
+      if (!propDescr.hasOwnProperty('defaultValue'))
+        return
+
+      if (propDescr.attribute && this.hasAttribute(propDescr.attribute))
+        return
+
+      this[propName] = propDescr.defaultValue
+    })
+  }
+
   attributeChangedCallback(name, oldValue, newValue) {
     const propName = this._attriName2PropName[name] 
     if (!isSame(this[propName], newValue))
