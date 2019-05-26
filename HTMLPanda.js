@@ -31,7 +31,7 @@ export default class HTMLPanda extends HTMLElement {
 
   attributeChangedCallback(name, oldValue, newValue) {
     const propName = this._attriName2PropName[name] 
-    if (newValue !== this[propName])
+    if (!isSame(this[propName], newValue))
       this[propName] = newValue 
   }
 }
@@ -48,7 +48,13 @@ function getSetter(instance, propName, propDescr) {
     const prevSetter = setter
     setter = value => {
       prevSetter(value)
-      instance.setAttribute(propDescr.attribute, value)
+
+      if (value === undefined)
+        instance.removeAttribute(propDescr.attribute)
+      else if (value === null)
+        instance.setAttribute(propDescr.attribute, '')
+      else
+        instance.setAttribute(propDescr.attribute, value)
     }
   }
 
@@ -62,4 +68,10 @@ function getSetter(instance, propName, propDescr) {
   }
 
   return setter
+}
+
+function isSame(thisValue, newValue) {
+  return thisValue === newValue
+    || thisValue === undefined && newValue === null
+    || thisValue === null && newValue === ''
 }
